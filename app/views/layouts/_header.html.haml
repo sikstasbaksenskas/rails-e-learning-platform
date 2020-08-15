@@ -13,6 +13,13 @@
         = link_to courses_path, class: 'nav-link' do
           .fa.fa-book
           Courses
+    .form-inlie.my-2.my-lg-0
+      = form_tag(root_path, method: :get) do
+        .input-group
+          = text_field_tag :name, params[:name], autocomplete: 'off', placeholder: "Search", class: "form-control"
+          %span.input-group-append
+            %button.btn.btn-primary-btn-sm{:type => "submit"}
+              %span.fa.fa-search{"aria-hidden" => "true"}
     = link_to 'Account settings', edit_user_registration_path, class: 'btn btn-outline-primary mr-1'
     = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-primary'
   - else
