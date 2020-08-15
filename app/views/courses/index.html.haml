@@ -1,25 +1,16 @@
-%h1 Listing courses
-
-%table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th
-      %th
-      %th
-      %th
-
-  %tbody
-    - @courses.each do |course|
-      %tr
-        %td= course.title
-        %td= course.description
-        %td= course.user
-        %td= link_to 'Show', course
-        %td= link_to 'Edit', edit_course_path(course)
-        %td= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Course', new_course_path
+.row
+  .col-sm-6.col-12
+    %h1 Courses
+  .col-sm-4.col-12
+    .form-inlie.my-2.my-lg-0
+      = form_tag(courses_path, method: :get) do
+        .input-group
+          = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: "form-control"
+          %span.input-group-append
+            %button.btn.btn-primary-btn-sm{:type => "submit"}
+              %span.fa.fa-search{"aria-hidden" => "true"}
+  .col-sm-2.col-12
+    = link_to 'New Course', new_course_path, class: 'btn btn-primary btn-block pull-right'
+.card-columns
+  - @courses.each do |course|
+    = render 'courses/course', course: course
